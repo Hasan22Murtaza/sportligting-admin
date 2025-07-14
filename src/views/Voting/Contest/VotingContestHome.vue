@@ -53,7 +53,6 @@
                     <template #Title="data">
                         <RouterLink :to="{ name: 'votingContestDetail', params: { contestId: data.value.id } }">
                             <div class="flex items-center">
-  
                                 <div class="flex flex-col">
                                     <span class="text-base text-primary font-black hover:underline">{{ data.value.title
                                         }}</span>
@@ -139,14 +138,45 @@ import Vue3Datatable from '@bhplugin/vue3-datatable';
 import { RouterLink } from 'vue-router';
 import Popper from 'vue3-popper';
 
+// Define the Contest interface to type the rows
+interface Contest {
+    id: string;
+    Email: string;
+    title: string;
+    Description: string;
+    Category: string;
+    Alias: string;
+    campaign_leader_name: string;
+    campaign_leader_role: string;
+    campaign_leader_signature: string;
+    assistant_leader_name: string;
+    assistant_leader_role: string;
+    assistant_leader_signature: string;
+    round: number;
+    fee_required: boolean;
+    registration_fee: number;
+    repeat_frequency: string;
+    user_id: string;
+    supported_by: string;
+    brief_objective: string;
+    sponsorship_email: string;
+    contest_mechanism_summary: string;
+    country: string;
+    audience: string;
+    start_date: string;
+    end_date: string;
+    created_at: string;
+    participants: number;
+    prize: number;
+    status: string;
+}
+
 const search = ref('');
 const isLoading = ref(false);
-const rows = ref([]);
+const rows = ref<Contest[]>([]);
 const cols = ref([
     { field: 'id', title: 'ID', isUnique: true, hide: false },
     { field: 'Title', title: 'Title', hide: false },
-    //{ field: 'Email', title: 'Created By', hide: false },
-    //{ field: 'Category', title: 'Category', hide: false },
     { field: 'participants', title: 'Participants', hide: false },
     { field: 'round', title: 'Current Round', sort: false, hide: false },
     { field: 'fee_required', title: 'Requires Fee', hide: false },
@@ -157,7 +187,7 @@ const cols = ref([
     { field: 'actions', title: 'Actions', sort: false, hide: false },
 ]);
 
-const getRowIndex = (row) => {
+const getRowIndex = (row: Contest) => {
     return rows.value.findIndex(r => r === row) + 1;
 };
 
@@ -178,7 +208,7 @@ const fetchContests = async () => {
         if (response.ok) {
             const data = await response.json();
             console.log('Fetched contests:', data);
-            rows.value = data.map(contest => ({
+            rows.value = data.map((contest: any) => ({
                 id: contest._id,
                 Email: contest.sponsorship_email || 'N/A',
                 title: contest.title,
@@ -213,7 +243,7 @@ const fetchContests = async () => {
             await nextTick();
         } else {
             console.error('Fetch error:', response.status, response.statusText);
-            const errorText = await response.text(); // Capture error details
+            const errorText = await response.text();
             console.error('Error details:', errorText);
             alert(`Error fetching contests: ${errorText || 'Unknown error'}`);
         }

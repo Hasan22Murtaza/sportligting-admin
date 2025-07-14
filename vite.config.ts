@@ -29,7 +29,7 @@ export default defineConfig({
             '/api': {
                 target: process.env.VITE_API_TARGET || "https://www.spotlightng.com",
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/api/, '/api'),
+                rewrite: (path) => path,
             },
         },
     },

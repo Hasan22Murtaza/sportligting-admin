@@ -199,7 +199,7 @@ const formatDate = (date: string) => {
 const fetchContests = async () => {
     isLoading.value = true;
     try {
-        const response = await fetch('/api/contests', {
+        const response = await fetch('https://www.spotlightng.com/api/contests', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -268,7 +268,7 @@ const determineStatus = (startDate: string, endDate: string) => {
 const deleteContest = async (id: string) => {
     if (!confirm('Are you sure you want to delete this contest?')) return;
     try {
-        const response = await fetch('/api/contests', {
+        const response = await fetch('https://www.spotlightng.com/api/contests', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

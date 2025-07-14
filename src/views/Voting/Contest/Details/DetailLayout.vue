@@ -170,7 +170,7 @@ const fetchContestDetail = async () => {
     isLoading.value = true;
     error.value = null;
     try {
-        const response = await fetch(`/api/contests/${contestId}`, {
+        const response = await fetch(`https://www.spotlightng.com/api/contests/${contestId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -238,7 +238,7 @@ const deleteContest = async () => {
     if (!confirm('Are you sure you want to delete this contest?')) return;
     const contestId = route.params.contestId as string;
     try {
-        const response = await fetch('/api/contests', {
+        const response = await fetch('https://www.spotlightng.com/api/contests', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

@@ -64,7 +64,7 @@
                 return;
             }
 
-            const response = await fetch(`/api/contact/${contestId}`);
+            const response = await fetch(`https://www.spotlightng.com/api/contact/${contestId}`);
             const data = await response.json();
             console.log('Fetched contacts:', data); // Debugging
 

@@ -245,7 +245,7 @@ const removeOtherBenefit = (index: number) => {
 
 const submitContest = async () => {
     try {
-        const response = await fetch('/api/contests', {
+        const response = await fetch('https://www.spotlightng.com/api/contests', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
